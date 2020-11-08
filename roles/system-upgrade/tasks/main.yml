@@ -1,0 +1,45 @@
+---
+# https://stackoverflow.com/a/55788709/1061279
+- name: Wait for control-plane pods become ready
+  shell: "kubectl wait --namespace=kube-system --for=condition=complete --timeout=32s job.batch/helm-install-traefik"
+  register: control_plane_pods_ready
+  become: yes
+
+- name: Create system-upgrade namespace
+  k8s:
+    name: system-upgrade
+    api_version: v1
+    kind: Namespace
+    state: present
+  environment:
+    KUBECONFIG: ~/.kube/config
+
+- name: Apply system-upgrade manifest.
+  k8s:
+    definition: "{{ lookup('url', 'https://raw.githubusercontent.com/rancher/system-upgrade-controller/master/manifests/system-upgrade-controller.yaml', split_lines=False ) | from_yaml_all | list}}"
+    state: present
+  environment:
+    KUBECONFIG: ~/.kube/config
+
+- name: Wait for all control-plane pods become created
+  shell: "kubectl get pods -l 'upgrade.cattle.io/controller'=system-upgrade-controller --output=jsonpath='{.items[*].metadata.name}' -n system-upgrade"
+  register: control_plane_pods_created
+  until: ("system-upgrade-controller" in control_plane_pods_created.stdout)
+  retries: 10
+  delay: 30
+  become: yes
+
+- name: Wait for system-upgrade pods become ready
+  shell: "kubectl wait --namespace=system-upgrade --for=condition=Ready pods -l 'upgrade.cattle.io/controller'=system-upgrade-controller --timeout=600s"
+  register: control_plane_pods_ready
+  become: yes
+
+- name: Apply system-upgrade plan manifests.
+  k8s:
+    definition: "{{ lookup('template', 'templates/' + item ) | from_yaml }}"
+    state: present
+  loop:
+    - server-plan.yml
+    - agent-plan.yml
+  environment:
+    KUBECONFIG: ~/.kube/config
