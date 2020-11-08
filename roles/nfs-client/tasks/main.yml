@@ -1,0 +1,26 @@
+---
+- name: Create nfs-client namespace.
+  k8s:
+    name: nfs-client
+    api_version: v1
+    kind: Namespace
+    state: present
+
+- name: Add stable chart repo.
+  helm_repository:
+    name: stable
+    repo_url: "https://kubernetes-charts.storage.googleapis.com/"
+
+- name: Deploy nfs-client-provisioner chart.
+  helm:
+    name: nfs-client
+    chart_ref: stable/nfs-client-provisioner
+    chart_version: '{{ nfs_chart_version }}'
+    release_namespace: nfs-client
+    state: present
+    values:
+      image:
+        repository: quay.io/external_storage/nfs-client-provisioner-arm
+      nfs:
+        server: '{{ nfs_server }}'
+        path: '{{ nfs_path }}'

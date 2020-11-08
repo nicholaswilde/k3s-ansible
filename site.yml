@@ -33,5 +33,7 @@
 
   roles:
     - role: system-upgrade
-  tags: ['system-upgrade']
+      tags: ['system-upgrade']
+    - role: nfs-client
+      tags: ['nfs-client']
 
