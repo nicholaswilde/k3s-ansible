@@ -1,3 +1,7 @@
+include make_env
+
+MASTER_IP ?= 192.168.1.192
+MASTER_USER ?= pirate
 
 .PHONY: copy-config redeploy
 
@@ -6,17 +10,17 @@ default: deploy
 ## deploy		: Deploy the k3s-cluster
 deploy: site.yml
 	ansible-playbook site.yml && \
-	scp pirate@192.168.1.201:~/.kube/config ~/.kube/config-turing-pi
+	scp ${MASTER_USER}@${MASTER_IP}:~/.kube/config ~/.kube/config-turing-pi
 
 ## copy-config	: Copy the config over
 copy-config: ~/.kube/config-turing-pi
-	scp pirate@192.168.1.201:~/.kube/config ~/.kube/config-turing-pi
+	scp ${MASTER_USER}@${MASTER_IP}:~/.kube/config ~/.kube/config-turing-pi
 
 ## redeploy	: Reset and the deploy the k3s-cluster
 redeploy:
 	ansible-playbook reset.yml && \
 	ansible-playbook site.yml && \
-	scp pirate@192.168.1.201:~/.kube/config ~/.kube/config-turing-pi
+	scp ${MASTER_USER}@${MASTER_IP}:~/.kube/config ~/.kube/config-turing-pi
 
 ## reset		: Reset the k3s-cluster
 reset: reset.yml
@@ -29,7 +33,9 @@ requirements: requirements.yaml
 
 ## sync		: Sync from the upstream repository
 sync:
-	git fetch upstream && git checkout master && git merge upstream/master
+	git fetch upstream && \
+	git checkout master && \
+	git merge upstream/master
 
 ## help		: Show help
 help: Makefile
