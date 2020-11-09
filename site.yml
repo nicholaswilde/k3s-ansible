@@ -32,6 +32,8 @@
     PATH: "~/go/bin:{{ ansible_env.PATH }}"
 
   roles:
+    - role: scp-config
+      tags: ['scp-config']
     - role: system-upgrade
       tags: ['system-upgrade']
     - role: nfs-client

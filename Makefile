@@ -9,8 +9,7 @@ default: deploy
 
 ## deploy		: Deploy the k3s-cluster
 deploy: site.yml
-	ansible-playbook site.yml && \
-	scp ${MASTER_USER}@${MASTER_IP}:~/.kube/config ~/.kube/config-turing-pi
+	ansible-playbook site.yml
 
 ## copy-config	: Copy the config over
 copy-config: ~/.kube/config-turing-pi
@@ -19,8 +18,7 @@ copy-config: ~/.kube/config-turing-pi
 ## redeploy	: Reset and the deploy the k3s-cluster
 redeploy:
 	ansible-playbook reset.yml && \
-	ansible-playbook site.yml && \
-	scp ${MASTER_USER}@${MASTER_IP}:~/.kube/config ~/.kube/config-turing-pi
+	ansible-playbook site.yml
 
 ## reset		: Reset the k3s-cluster
 reset: reset.yml

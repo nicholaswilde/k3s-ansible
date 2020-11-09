@@ -1,0 +1,6 @@
+---
+- name: Transfer the cluster config file
+  fetch:
+    src: ~/.kube/config
+    dest: ~/.kube/config-turing-pi
+    flat: yes
