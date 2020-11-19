@@ -5,8 +5,6 @@ MASTER_USER ?= pirate
 
 .PHONY: copy-config redeploy
 
-default: deploy
-
 ## deploy		: Deploy the k3s-cluster
 deploy: site.yml
 	ansible-playbook site.yml
@@ -25,7 +23,8 @@ reset: reset.yml
 	ansible-playbook reset.yml
 
 ## requirements	: Install the requirements
-requirements: requirements.yaml
+#git remote add upstream https://github.com/rancher/k3s-ansible.git && \
+requirements:	requirements.yaml
 	ansible-galaxy role install -r requirements.yaml --force && \
 	ansible-galaxy collection install -r requirements.yaml --force
 
@@ -38,3 +37,5 @@ sync:
 ## help		: Show help
 help: Makefile
 	@sed -n 's/^##//p' $<
+
+default: deploy

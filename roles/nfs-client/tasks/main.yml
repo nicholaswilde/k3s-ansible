@@ -1,7 +1,7 @@
 ---
-- name: Create nfs-client namespace.
+- name: Create managed-nfs-storage namespace.
   k8s:
-    name: nfs-client
+    name: managed-nfs-storage
     api_version: v1
     kind: Namespace
     state: present
@@ -13,10 +13,10 @@
 
 - name: Deploy nfs-client-provisioner chart.
   helm:
-    name: nfs-client
+    name: managed-nfs-client
     chart_ref: stable/nfs-client-provisioner
     chart_version: '{{ nfs_chart_version }}'
-    release_namespace: nfs-client
+    release_namespace: managed-nfs-storage
     state: present
     values:
       image:
@@ -24,3 +24,6 @@
       nfs:
         server: '{{ nfs_server }}'
         path: '{{ nfs_path }}'
+      storageClass:
+        create: true
+        name: managed-nfs-storage
