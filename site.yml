@@ -36,6 +36,6 @@
       tags: ['scp-config']
     - role: system-upgrade
       tags: ['system-upgrade']
-    - role: nfs-client
-      tags: ['nfs-client']
+    - role: managed-nfs-storage
+      tags: ['managed-nfs-storage']
 
