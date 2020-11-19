@@ -10,12 +10,12 @@ spec:
   cordon: true
   nodeSelector:
     matchExpressions:
-    - key: node-role.kubernetes.io/master
-      operator: DoesNotExist
+      - key: node-role.kubernetes.io/master
+        operator: DoesNotExist
   prepare:
     args:
-    - prepare
-    - server-plan
+      - prepare
+      - server-plan
     image: rancher/k3s-upgrade:v1.19.3-k3s2
   serviceAccountName: system-upgrade
   upgrade:
