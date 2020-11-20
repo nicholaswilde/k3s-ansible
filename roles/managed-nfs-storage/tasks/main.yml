@@ -16,7 +16,7 @@
     name: managed-nfs-client
     chart_ref: stable/nfs-client-provisioner
     chart_version: '{{ nfs_chart_version }}'
-    release_namespace: managed-nfs-storage
+    release_namespace: ""{{ storage_class }}"
     state: present
     values:
       image:

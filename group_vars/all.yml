@@ -1,12 +1,13 @@
 ---
 k3s_version: v1.19.3+k3s3
 ansible_user: pirate
-systemd_dir: /etc/systemd/system
+systemd_dir: "/etc/systemd/system"
 master_ip: "{{ hostvars[groups['master'][0]]['ansible_host'] | default(groups['master'][0]) }}"
 extra_server_args: ""
 extra_agent_args: ""
 
 # nfs-client
 nfs_server: 192.168.1.192
-nfs_path: /home/pi/nas/nfs
+nfs_path: "/home/pi/nas/nfs"
 nfs_chart_version: 1.2.9
+storage_class: "managed-nfs-storage"

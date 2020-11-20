@@ -23,7 +23,6 @@ reset: reset.yml
 	ansible-playbook reset.yml
 
 ## requirements	: Install the requirements
-#git remote add upstream https://github.com/rancher/k3s-ansible.git && \
 requirements:	requirements.yaml
 	ansible-galaxy role install -r requirements.yaml --force && \
 	ansible-galaxy collection install -r requirements.yaml --force
