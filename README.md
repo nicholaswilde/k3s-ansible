@@ -1,4 +1,5 @@
 # Build a Kubernetes cluster using k3s via Ansible
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fnicholaswilde%2Fk3s-ansible.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fnicholaswilde%2Fk3s-ansible?ref=badge_shield)
 
 Author: <https://github.com/itwars>
 
