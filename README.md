@@ -1,9 +1,7 @@
 # Build a Kubernetes cluster using k3s via Ansible
 [![GitHub](https://img.shields.io/github/license/nicholaswilde/k3s-ansible)](./LICENSE.md)
+[![Lint](https://github.com/nicholaswilde/k3s-ansible/workflows/Lint/badge.svg)](https://github.com/nicholaswilde/k3s-ansible/actions?query=workflow%3ALint)
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fnicholaswilde%2Fk3s-ansible.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fnicholaswilde%2Fk3s-ansible?ref=badge_shield)
-
-Author: <https://github.com/itwars>
-Contributor: [Nicholas Wilde](http://github.com/nicholaswilde)
 
 ## K3s Ansible Playbook
 
@@ -61,7 +59,7 @@ $ $ ansible-playbook reset.yml -i hosts.yaml
 To get access to your **Kubernetes** cluster just
 
 ```bash
-scp pirate@master_ip:~/.kube/config ~/.kube/config
+$ scp pirate@master_ip:~/.kube/config ~/.kube/config
 ```
 
 ### Pre-commit hook
@@ -71,13 +69,13 @@ If you want to automatically lint the files with a pre-commit hook, make sure yo
 to your project. Then run:
 
 ```bash
-pre-commit install
-pre-commit install-hooks
+$ pre-commit install
+$ pre-commit install-hooks
 ```
 
 ## Todo
 
-- [ ]system-upgrade
+- [ ] system-upgrade
 
 ## Author
 
