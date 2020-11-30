@@ -52,7 +52,7 @@ $ ansible-playbook site.yml -i hosts.yaml
 ```bash
 $ make reset
 # or
-$ $ ansible-playbook reset.yml -i hosts.yaml
+$ ansible-playbook reset.yml -i hosts.yaml
 ```
 
 ## Kubeconfig
