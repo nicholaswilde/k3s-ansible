@@ -1,6 +1,7 @@
 # Build a Kubernetes cluster using k3s via Ansible
 [![GitHub](https://img.shields.io/github/license/nicholaswilde/k3s-ansible)](./LICENSE.md)
-[![Lint](https://github.com/nicholaswilde/k3s-ansible/workflows/Lint/badge.svg)](https://github.com/nicholaswilde/k3s-ansible/actions?query=workflow%3ALint)
+[![CI](https://github.com/nicholaswilde/k3s-ansible/workflows/CI/badge.svg?branch=master)](https://github.com/nicholaswilde/k3s-ansible/actions?query=workflow%3ACI)
+[![Ansible Lint](![Ansible Lint](https://github.com/nicholaswilde/k3s-ansible/workflows/Ansible%20Lint/badge.svg?branch=master))](https://github.com/nicholaswilde/k3s-ansible/actions?query=workflow%3A%22Ansible+Lint%22)
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fnicholaswilde%2Fk3s-ansible.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fnicholaswilde%2Fk3s-ansible?ref=badge_shield)
 
 ## K3s Ansible Playbook
