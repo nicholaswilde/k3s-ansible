@@ -1,4 +1,8 @@
 ---
+- name: Pause for 10 seconds to start cluster
+  pause:
+    seconds: 10
+
 # https://stackoverflow.com/a/55788709/1061279
 - name: Wait for control-plane pods become ready
   shell: "kubectl wait --namespace=kube-system --for=condition=complete --timeout=32s job.batch/helm-install-traefik"

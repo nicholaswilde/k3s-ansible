@@ -1,7 +1,9 @@
 # Build a Kubernetes cluster using k3s via Ansible
+[![GitHub](https://img.shields.io/github/license/nicholaswilde/k3s-ansible)](./LICENSE.md)
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fnicholaswilde%2Fk3s-ansible.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fnicholaswilde%2Fk3s-ansible?ref=badge_shield)
 
 Author: <https://github.com/itwars>
+Contributor: [Nicholas Wilde](http://github.com/nicholaswilde)
 
 ## K3s Ansible Playbook
 
@@ -17,6 +19,11 @@ on processor architecture:
 - [X] arm64
 - [X] armhf
 
+The following extras are installed from the base k3s-ansible repository:
+- [managed-nfs-storage]()
+- [system-upgrade]()
+- [scp-config]()
+
 ## System requirements
 
 Deployment environment must have Ansible 2.4.0+
@@ -27,29 +34,27 @@ Master and nodes must have passwordless SSH access
 First create a new directory based on the `sample` directory within the `inventory` directory:
 
 ```bash
-cp -R inventory/sample inventory/my-cluster
+cp example.hosts.yaml hosts.yaml
 ```
 
-Second, edit `inventory/my-cluster/hosts.ini` to match the system information gathered above. For example:
+Second, edit `hosts.yaml` to match the system information gathered above.
 
-```bash
-[master]
-192.16.35.12
-
-[node]
-192.16.35.[10:11]
-
-[k3s_cluster:children]
-master
-node
-```
-
-If needed, you can also edit `inventory/my-cluster/group_vars/all.yml` to match your environment.
+If needed, you can also edit `group_vars/all.yml` to match your environment.
 
 Start provisioning of the cluster using the following command:
 
 ```bash
-ansible-playbook site.yml -i inventory/my-cluster/hosts.ini
+$ make deploy
+# or
+$ ansible-playbook site.yml -i hosts.yaml
+```
+
+### Reset
+
+```bash
+$ make reset
+# or
+$ $ ansible-playbook reset.yml -i hosts.yaml
 ```
 
 ## Kubeconfig
@@ -57,5 +62,20 @@ ansible-playbook site.yml -i inventory/my-cluster/hosts.ini
 To get access to your **Kubernetes** cluster just
 
 ```bash
-scp debian@master_ip:~/.kube/config ~/.kube/config
+scp pirate@master_ip:~/.kube/config ~/.kube/config
 ```
+
+### Pre-commit hook
+
+If you want to automatically lint the files with a pre-commit hook, make sure you
+[install the pre-commit binary](https://pre-commit.com/#install), and add a [.pre-commit-config.yaml file](./.pre-commit-config.yaml)
+to your project. Then run:
+
+```bash
+pre-commit install
+pre-commit install-hooks
+```
+
+## Author
+
+The repository was created in 2019 by [Vincent RABAH](https://github.com/itwars) and modified by [Nicholas Wilde](https://about.me/nicholas.wilde).

@@ -14,7 +14,7 @@
     - role: k3s/master
   tags: ['base']
 
-- hosts: node
+- hosts: nodes
   become: yes
   roles:
     - role: k3s/node
@@ -24,7 +24,7 @@
   become: no
   gather_facts: no
   collections:
-    - community.kubernetes
+    - kubernetes.core
 
   environment:
     # The location of the kubeconfig file on the master.
@@ -34,7 +34,7 @@
   roles:
     - role: scp-config
       tags: ['scp-config']
-    - role: system-upgrade
-      tags: ['system-upgrade']
+#    - role: system-upgrade
+#      tags: ['system-upgrade']
     - role: managed-nfs-storage
       tags: ['managed-nfs-storage']
