@@ -23,7 +23,6 @@ jobs:
 
       - name: Install test dependencies.
         run: pip3 install yamllint ansible-lint
-        id: 
         
       - name: Install dependencies (collections)
         run:  ansible-galaxy role install -r requirements.yml --force && ansible-galaxy collection install -r requirements.yml --force
