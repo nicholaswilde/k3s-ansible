@@ -21,7 +21,6 @@ on processor architecture:
 
 The following extras are installed from the base k3s-ansible repository:
 - [managed-nfs-storage]()
-- [system-upgrade]()
 - [scp-config]()
 
 ## System requirements
@@ -75,6 +74,10 @@ to your project. Then run:
 pre-commit install
 pre-commit install-hooks
 ```
+
+## Todo
+
+- [ ]system-upgrade
 
 ## Author
 
