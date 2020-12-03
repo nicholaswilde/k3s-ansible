@@ -1,0 +1,16 @@
+---
+- name: Get the k3s_version
+  block:
+    - name: Get the release channels
+      uri:
+        url: https://update.k3s.io/v1-release/channels
+        return_content: yes
+        status_code: 200
+      register: this
+
+    - name: Get the k3s version from the channel
+      set_fact:
+        k3s_version: "{{ this| json_query(query)|join(' ') }}"
+      vars:
+        query: "json.data[?name=='{{ k3s_channel }}'].latest"
+  when: (k3s_version is not defined) or (k3s_version|length == 0)

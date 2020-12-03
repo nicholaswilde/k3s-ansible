@@ -4,6 +4,7 @@
   become: yes
   roles:
     - role: prereq
+    - role: get_version
     - role: download
     - role: raspberrypi
   tags: ['base']
@@ -34,7 +35,9 @@
   roles:
     - role: scp-config
       tags: ['scp-config']
+
 #    - role: system-upgrade
 #      tags: ['system-upgrade']
+
     - role: managed-nfs-storage
       tags: ['managed-nfs-storage']

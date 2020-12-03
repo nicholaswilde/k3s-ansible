@@ -1,10 +1,12 @@
 ---
-k3s_version: v1.19.3+k3s3
+k3s_version: ""
+# https://update.k3s.io/v1-release/channels
+k3s_channel: stable
 ansible_user: pirate
 systemd_dir: "/etc/systemd/system"
 master_ip: "{{ hostvars[groups['master'][0]]['ansible_host'] | default(groups['master'][0]) }}"
-extra_server_args: ""
-#extra_server_args: "--node-taint k3s-controlplane=true:NoExecute"
+# https://github.com/rancher/docs/issues/2707
+extra_server_args: "--node-taint CriticalAddonsOnly=true:NoExecute"
 extra_agent_args: ""
 
 # nfs-client

@@ -39,6 +39,8 @@ Second, edit `hosts.yaml` to match the system information gathered above.
 
 If needed, you can also edit `group_vars/all.yml` to match your environment.
 
+Select which [k3s channel](https://update.k3s.io/v1-release/channels) to use.
+
 Start provisioning of the cluster using the following command:
 
 ```bash
