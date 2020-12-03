@@ -3,7 +3,7 @@ include make_env
 MASTER_IP ?= 192.168.1.192
 MASTER_USER ?= pirate
 
-.PHONY: copy-config redeploy
+.PHONY: copy-config redeploy addupstream
 
 ## deploy		: Deploy the k3s-cluster
 deploy: site.yml
@@ -26,6 +26,10 @@ reset: reset.yml
 requirements:	requirements.yaml
 	ansible-galaxy role install -r requirements.yaml --force && \
 	ansible-galaxy collection install -r requirements.yaml --force
+
+## addupstream	: Add upstream
+addupstream:
+	git remote add upstream https://github.com/k3s-io/k3s-ansible.git
 
 ## sync		: Sync from the upstream repository
 sync:
